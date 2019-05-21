@@ -1,0 +1,7 @@
+function main(a) {
+    var b = bar(2);
+    function bar(x) {
+        return b + x + 1;
+    }
+    return bar(b) + 2;
+}
