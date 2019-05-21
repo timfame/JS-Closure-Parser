@@ -25,7 +25,7 @@ public class Checker {
         try {
             output = parser.parse();
         } catch (ClosureException| UndefinedException| IOException e) {
-            System.out.println("Invalid input");
+            System.out.println("Invalid input" + e.getMessage() + " on TEST " + index);
             return;
         } catch (Exception e) {
             System.out.println("Program has crashed");
@@ -43,13 +43,17 @@ public class Checker {
             System.out.println("Output:\n\n" + output + "\n");
             System.out.println("----------------");
         }
-        String ansInput = engine.eval(input).toString();
-        String ansOutput = engine.eval(output).toString();
-        if (ansInput.equals(ansOutput)) {
-            System.out.println("Correct! - " + ansInput + " = " + ansOutput);
-        } else {
-            System.out.println("Incorrect! - " + ansInput + " = " + ansOutput);
+        try {
+            String ansInput = engine.eval(input).toString();
+            String ansOutput = engine.eval(output).toString();
+            if (ansInput.equals(ansOutput)) {
+                System.out.println("Correct! - " + ansInput + " = " + ansOutput);
+            } else {
+                System.out.println("Incorrect! - " + ansInput + " = " + ansOutput);
+            }
+            System.out.println("----------------\n");
+        } catch (ScriptException e) {
+            System.out.println("Code was incorrect");
         }
-        System.out.println("----------------\n");
     }
 }
