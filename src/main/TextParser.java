@@ -18,7 +18,9 @@ public class TextParser {
     }
 
     Function getTokens() throws IOException, UndefinedException, ClosureException {
-        files.nextWord();
+        if (!files.nextWord().equals("function")) {
+            throw new UndefinedException(files.getWord(), files.getPos(files.getWord().length()));
+        }
         return getFunction();
     }
 
